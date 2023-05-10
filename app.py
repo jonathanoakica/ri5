@@ -3,6 +3,7 @@ import pandas as pd
 import random
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from altair.vegalite.v4.api import Chart
 
 st.set_page_config(page_title="RI-5 Mockup", layout='wide')
 

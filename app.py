@@ -12,6 +12,7 @@ df = pd.read_csv('imdrf.csv')
 st.sidebar.title('RI-5 Mockup')
 
 rev = ['P1254/S012', 'P6489/S010', 'P9876/S008', 'P3574/S006']
+
 selected = st.sidebar.selectbox('Review Number:', rev)
 
 col1, col2, col3 = st.columns((5,1,5))
@@ -22,6 +23,20 @@ with col1:
 
 with col3:
     if search:
+
+        #search = search.to_lower()
+        #ricksdf = pd.read_csv('ricksdf.csv')
+        #   preprocess it here
+        # REMEMBER to create a tuple of code and scores and sort the tuple by the score retrieve the top 3
+        
+        #for i, j in zip(ricksdf.ae_term, index):
+         #   if search == i:
+          #      imdrf_code = df.at[index, 'imdrf_codes']
+          #      scores = (df.at[index, 'scores'])
+                
+
+
+
         # Create a TfidfVectorizer to transform the text data
         vectorizer = TfidfVectorizer()
         X = vectorizer.fit_transform(df['term'])
@@ -31,6 +46,7 @@ with col3:
 
         # Compute the cosine similarity between the user vector and all the text vectors
         similarity_scores = cosine_similarity(X, user_vector)
+
         # Get the indices of the top 3 scores
         top_indices = similarity_scores.argsort(axis=0)[-3:].flatten()
 
@@ -225,7 +241,7 @@ if sbs1:
     with col11:
 
         # Create an empty DataFrame
-        df = pd.DataFrame(columns=(f'{selected}', f'{sbs1_name}'))
+        df = pd.DataFrame(columns=(f'{sbs1_name}', 'Subject Submission'))
 
         # Populate the DataFrame
         df.loc[0] = ['Event', 'Rate Indicator']
@@ -238,7 +254,7 @@ if sbs2:
     with col12:
 
         # Create an empty DataFrame
-        df = pd.DataFrame(columns=(f'{selected}', f'{sbs2_name}'))
+        df = pd.DataFrame(columns=(f'{sbs2_name}', 'Subject Submission'))
 
         # Populate the DataFrame
         df.loc[0] = ['Event', 'Rate Indicator']
@@ -254,7 +270,7 @@ if sbs3:
     with col13:
 
         # Create an empty DataFrame
-        df = pd.DataFrame(columns=(f'{selected}', f'{sbs3_name}'))
+        df = pd.DataFrame(columns=(f'{sbs3_name}', 'Subject Submission'))
 
         # Populate the DataFrame
         df.loc[0] = ['Event', 'Rate Indicator']
@@ -268,7 +284,7 @@ if sbs4:
     with col14:
 
         # Create an empty DataFrame
-        df = pd.DataFrame(columns=(f'{selected}', f'{sbs4_name}'))
+        df = pd.DataFrame(columns=(f'{sbs4_name}', 'Subject Submission'))
 
         # Populate the DataFrame
         df.loc[0] = ['Event', 'Rate Indicator']

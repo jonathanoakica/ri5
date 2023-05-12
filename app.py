@@ -130,6 +130,10 @@ ot = pmas.query("PMA == 'P100047'")
 ot.dropna(inplace=True)
 ot.reset_index(inplace=True, drop=True)
 
+mn_rates = ["{:.2%}".format(i/1304) for i in mn['# MDRs'][:10]]
+ot_rates = ["{:.2%}".format(i/1304) for i in ot['# MDRs'][:10]]
+sp_rates = ["{:.2%}".format(i/1304) for i in sp['# MDRs'][:10]]
+
 # Clear session state if the dropdown value changes
 if 'selected_value' not in st.session_state or st.session_state.selected_value != selected:
     st.session_state.clear()
@@ -283,3 +287,54 @@ if sbs2:
 
         
         st.table(df3)
+
+st.write("________________________________________________________________________________")
+st.subheader('MDR Rates')
+if btn2:
+
+    spacer4, col13, spacer5, col14, spacer6, col15, spacer7 = st.columns((0.4,4,0.15,4,0.15,4,0.4))
+
+    with col13:
+
+        # Create an empty DataFrame
+        df = pd.DataFrame(columns=(f'{selected}', 'Subject Submission'))
+
+        # Populate the DataFrame
+        df.loc[0] = ['Event', 'MDR Rate Indicator']
+        #choices = random.sample(samp1, k=4)
+        for i, choice, percent in zip(range(1, len(sel_choices)+1), sel_choices, mn_rates):
+            df.loc[i] = [choice, percent]
+        
+        st.table(df)
+
+    if sbs1:
+        with col14:
+
+            # Create an empty DataFrame
+            df2 = pd.DataFrame(columns=(f'{sbs1_name}', 'Subject Submission'))
+
+            # Populate the DataFrame
+            df2.loc[0] = ['Event', 'MDR Rate Indicator']
+            #choices = random.sample(samp1, k=4)
+            for i, choice2, percent2 in zip(range(1, len(sel_choices)+1), sel_choices, sp_rates):
+                df2.loc[i] = [choice2, percent2]
+            
+            st.table(df2)
+
+    if sbs2:
+        with col15:
+
+            # Create an empty DataFrame
+            df3 = pd.DataFrame(columns=(f'{sbs2_name}', 'Subject Submission'))
+
+            # Populate the DataFrame
+            df3.loc[0] = ['Event', 'MDR Rate Indicator']
+            #choices = random.sample(samp1, k=4)
+            terms = list(ot['AE_Terms'][:10])
+            ratess = list(ot['Affected / at Risk (%)'][:10])
+            for i, ter, rat in zip(range(1,11), terms, ot_rates):
+                df3.loc[i] = [ter, rat]
+
+
+            
+            st.table(df3)

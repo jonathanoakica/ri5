@@ -8,7 +8,7 @@ from altair.vegalite.v4.api import Chart
 st.set_page_config(page_title="RI-5 Mockup", layout='wide')
 
 df = pd.read_csv('ae_imdrf.csv')
-
+df5 = pd.read_csv('imdrf.csv')
 st.sidebar.title('RI-5 Mockup')
 
 rev = ['P060040']
@@ -39,7 +39,7 @@ with col3:
 
         # Create a TfidfVectorizer to transform the text data
         vectorizer = TfidfVectorizer()
-        X = vectorizer.fit_transform(df['Text'])
+        X = vectorizer.fit_transform(df5['term'])
 
         # Transform the user input into a vector
         user_vector = vectorizer.transform([search])
@@ -48,35 +48,25 @@ with col3:
         similarity_scores = cosine_similarity(X, user_vector)
 
         # Get the indices of the top 3 scores
-        top_indices = similarity_scores.argsort(axis=0)[-1].flatten()
-        idx = top_indices[0]
-        p_code = df.at[idx, 'NLP Problem Code']
-        p_code = eval(p_code)
-        p_score = df.at[idx, 'Score']
-        p_score = eval(p_score)
-        p_desc = df.at[idx, 'NLP Problem Description']
-        p_desc = eval(p_desc)
-        p_score = [ "{:.10f}".format(i) for i in p_score]
+        top_indices = similarity_scores.argsort(axis=0)[-3:].flatten()
 
         # Get the top 3 terms, rows, and scores
         top_terms = vectorizer.get_feature_names()
-
-        top_rows = df.iloc[top_indices]['Text']
-
+        top_rows = df5.iloc[top_indices]['term']
         top_scores = similarity_scores[top_indices].flatten()
 
         disp = pd.DataFrame(columns=('IMDRF Code', 'IMDRF Term', 'Score'))
 
-        #top_scores_percent = (top_scores * 100).round(2)
-        #top_scores_percent_str = [str(i)+'%' for i in top_scores_percent]
-        #top_scores_percent_str.reverse()
-        #codes = [df.at[i, 'code'] for i in top_indices]
-        #codes.reverse()
-        #terms = [df.at[i, 'term'] for i in top_indices]
-        #terms.reverse()
-        disp['IMDRF Code'] = p_code
-        disp['IMDRF Term'] = p_desc
-        disp['Score'] = p_score
+        top_scores_percent = (top_scores * 100).round(2)
+        top_scores_percent_str = [str(i)+'%' for i in top_scores_percent]
+        top_scores_percent_str.reverse()
+        codes = [df5.at[i, 'code'] for i in top_indices]
+        codes.reverse()
+        terms = [df5.at[i, 'term'] for i in top_indices]
+        terms.reverse()
+        disp['IMDRF Code'] = codes
+        disp['IMDRF Term'] = terms
+        disp['Score'] = top_scores_percent_str
         st.table(disp)
 
 st.write("________________________________________________________________________________")

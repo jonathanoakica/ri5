@@ -1,0 +1,80 @@
+PMA,Device Name (from CT),AE_Terms,Affected / at Risk (%),# Events,# MDRs
+P100047,HeartWare® VAS,Major Bleeding,156/308 (50.65%),297,230
+P100047,HeartWare® VAS,Hemolysis,3/308 (0.97%),4,206
+P100047,HeartWare® VAS,Cardiac Arrhythmia,95/308 (30.84%),132,470
+P100047,HeartWare® VAS,Hypertension,27/308 (8.77%),34,62
+P100047,HeartWare® VAS,Myocardial Infarction,0/308 (0.00%),0,207
+P100047,HeartWare® VAS,Pericardial Fluid Collection,17/308 (5.52%),18,7
+P100047,HeartWare® VAS,Right Heart Failure,94/308 (30.52%),101,638
+P100047,HeartWare® VAS,Other Intermacs,219/308 (71.10%),599,
+P100047,HeartWare® VAS,Hepatic Dysfunction,10/308 (3.25%),10,58
+P100047,HeartWare® VAS,Major Infection,150/308 (48.70%),259,395
+P100047,HeartWare® VAS,Neurological Dysfunction,57/308 (18.51%),83,97
+P100047,HeartWare® VAS,Device Malfunction/Failure,60/308 (19.48%),81,
+P100047,HeartWare® VAS,Psychiatric Episode,34/308 (11.04%),35,7
+P100047,HeartWare® VAS,Renal Dysfunction,32/308 (10.39%),35,120
+P100047,HeartWare® VAS,Respiratory Failure,61/308 (19.81%),74,90
+P100047,HeartWare® VAS,Wound Dehiscence,1/308 (0.32%),1,18
+P100047,HeartWare® VAS,Arterial Non-CNS Thromboembolism,3/308 (0.97%),3,
+P100047,HeartWare® VAS,Venous Thromboembolism,11/308 (3.57%),11,1200
+P060040,HeartMate II ,Bleeding (All serious events) ,102/133 (76.69%) ,278,358
+P060040,HeartMate II ,Bleeding requiring surgery ,40/133 (30.08%) ,50,177
+P060040,HeartMate II ,Cardiac Arrhythmia ,62/133 (46.62%) ,110,342
+P060040,HeartMate II ,Confirmed Malfunctions ,30/133 (22.56%) ,39,39
+P060040,HeartMate II ,Device Thrombosis ,5/133 (3.76%) ,5,191
+P060040,HeartMate II ,Drive Line Infection ,39/133 (29.32%) ,75,1133
+P060040,HeartMate II ,Hemolysis ,5/133 (3.76%) ,5,104
+P060040,HeartMate II ,Hepatic Dysfunction ,3/133 (2.26%) ,3,32
+P060040,HeartMate II ,Local Infection ,40/133 (30.08%) ,60,111
+P060040,HeartMate II ,Myocardial Infarction ,0/133 (0.00%) ,0,117
+P060040,HeartMate II ,Other neurological ,27/133 (20.30%) ,32,22
+P060040,HeartMate II ,Peripheral Thromboembolism ,14/133 (10.53%) ,21,344
+P060040,HeartMate II ,Pocket Infection ,12/133 (9.02%) ,19,59
+P060040,HeartMate II ,Psychological ,4/133 (3.01%) ,4,4
+P060040,HeartMate II ,Pump Housing ,1/133 (0.75%) ,1,
+P060040,HeartMate II ,Renal Failure ,21/133 (15.79%) ,21,175
+P060040,HeartMate II ,Respiratory Failure ,47/133 (35.34%) ,61,50
+P060040,HeartMate II ,Right Heart Failure (Inotropes) ,27/133 (20.30%) ,29,1068
+P060040,HeartMate II ,Right Heart Failure (RVAD) ,5/133 (3.76%) ,5,
+P060040,HeartMate II ,Sepsis ,48/133 (36.09%) ,80,70
+P060040,HeartMate II ,Stroke ,24/133 (18.05%) ,27,160
+P060040,HeartMate XVE ,Bleeding (All serious events) ,41/59 (69.49%) ,70,358
+P060040,HeartMate XVE ,Bleeding requiring surgery ,9/59 (15.25%) ,12,177
+P060040,HeartMate XVE ,Cardiac Arrhythmia ,21/59 (35.59%) ,30,342
+P060040,HeartMate XVE ,Confirmed Malfunctions ,12/59 (20.34%) ,14,39
+P060040,HeartMate XVE ,Device Thrombosis ,0/59 (0.00%) ,0,191
+P060040,HeartMate XVE ,Drive Line Infection ,14/59 (23.73%) ,22,1133
+P060040,HeartMate XVE ,Hemolysis ,0/59 (0.00%) ,0,104
+P060040,HeartMate XVE ,Hepatic Dysfunction ,0/59 (0.00%) ,0,32
+P060040,HeartMate XVE ,Local Infection ,19/59 (32.20%) ,30,111
+P060040,HeartMate XVE ,Myocardial Infarction ,1/59 (1.69%) ,1,117
+P060040,HeartMate XVE ,Other neurological ,9/59 (15.25%) ,11,22
+P060040,HeartMate XVE ,Peripheral Thromboembolism ,6/59 (10.17%) ,6,344
+P060040,HeartMate XVE ,Pocket Infection ,8/59 (13.56%) ,10,59
+P060040,HeartMate XVE ,Psychological ,0/59 (0.00%) ,0,4
+P060040,HeartMate XVE ,Pump Housing ,2/59 (3.39%) ,2,
+P060040,HeartMate XVE ,Renal Failure ,14/59 (23.73%) ,14,175
+P060040,HeartMate XVE ,Respiratory Failure ,24/59 (40.68%) ,33,50
+P060040,HeartMate XVE ,Right Heart Failure (Inotropes) ,16/59 (27.12%) ,19,1068
+P060040,HeartMate XVE ,Right Heart Failure (RVAD) ,3/59 (5.08%) ,3,
+P060040,HeartMate XVE ,Sepsis ,26/59 (44.07%) ,45,70
+P060040,HeartMate XVE ,Stroke ,8/59 (13.56%) ,9,160
+P160054,HeartMate 3 (As-Treated) ,Arterial Non-CNS Thromboembolism ,5/515 (0.97%) ,,
+P160054,HeartMate 3 (As-Treated) ,Bleeding ,214/515 (41.55%) ,,1220
+P160054,HeartMate 3 (As-Treated) ,Cardiac Arrhythmia ,149/515 (28.93%) ,,1524
+P160054,HeartMate 3 (As-Treated) ,Hemolysis ,6/515 (1.17%) ,,404
+P160054,HeartMate 3 (As-Treated) ,Hepatic Dysfunction ,20/515 (3.88%) ,,176
+P160054,HeartMate 3 (As-Treated) ,Hypertension ,23/515 (4.47%) ,,148
+P160054,HeartMate 3 (As-Treated) ,Major Infection ,274/515 (53.20%) ,,972
+P160054,HeartMate 3 (As-Treated) ,Myocardial Infarction ,6/515 (1.17%) ,,480
+P160054,HeartMate 3 (As-Treated) ,Other Neurological Event ,59/515 (11.46%) ,,70
+P160054,HeartMate 3 (As-Treated) ,Other ,340/515 (66.02%) ,,361
+P160054,HeartMate 3 (As-Treated) ,Pericardial Fluid Collection ,25/515 (4.85%) ,,92
+P160054,HeartMate 3 (As-Treated) ,Psychiatric Episode ,31/515 (6.02%) ,,25
+P160054,HeartMate 3 (As-Treated) ,Renal Dysfunction ,70/515 (13.59%) ,,275
+P160054,HeartMate 3 (As-Treated) ,Respiratory Failure ,110/515 (21.36%) ,,385
+P160054,HeartMate 3 (As-Treated) ,Right Heart Failure ,151/515 (29.32%) ,,3854
+P160054,HeartMate 3 (As-Treated) ,Stroke ,51/515 (9.90%) ,,776
+P160054,HeartMate 3 (As-Treated) ,Suspected Device Thrombosis ,7/515 (1.36%) ,,640
+P160054,HeartMate 3 (As-Treated) ,Venous Thromboembolism ,20/515 (3.88%) ,,285
+P160054,HeartMate 3 (As-Treated) ,Wound Dehiscence ,4/515 (0.78%) ,,82

@@ -7,11 +7,11 @@ from altair.vegalite.v4.api import Chart
 
 st.set_page_config(page_title="RI-5 Mockup", layout='wide')
 
-df = pd.read_csv('imdrf.csv')
+df = pd.read_csv('ae_imdrf.csv')
 
 st.sidebar.title('RI-5 Mockup')
 
-rev = ['P1254/S012', 'P6489/S010', 'P9876/S008', 'P3574/S006']
+rev = ['P060040']
 
 selected = st.sidebar.selectbox('Review Number:', rev)
 
@@ -39,7 +39,7 @@ with col3:
 
         # Create a TfidfVectorizer to transform the text data
         vectorizer = TfidfVectorizer()
-        X = vectorizer.fit_transform(df['term'])
+        X = vectorizer.fit_transform(df['Text'])
 
         # Transform the user input into a vector
         user_vector = vectorizer.transform([search])
@@ -48,25 +48,35 @@ with col3:
         similarity_scores = cosine_similarity(X, user_vector)
 
         # Get the indices of the top 3 scores
-        top_indices = similarity_scores.argsort(axis=0)[-3:].flatten()
+        top_indices = similarity_scores.argsort(axis=0)[-1].flatten()
+        idx = top_indices[0]
+        p_code = df.at[idx, 'NLP Problem Code']
+        p_code = eval(p_code)
+        p_score = df.at[idx, 'Score']
+        p_score = eval(p_score)
+        p_desc = df.at[idx, 'NLP Problem Description']
+        p_desc = eval(p_desc)
+        p_score = [ "{:.10f}".format(i) for i in p_score]
 
         # Get the top 3 terms, rows, and scores
         top_terms = vectorizer.get_feature_names()
-        top_rows = df.iloc[top_indices]['term']
+
+        top_rows = df.iloc[top_indices]['Text']
+
         top_scores = similarity_scores[top_indices].flatten()
 
         disp = pd.DataFrame(columns=('IMDRF Code', 'IMDRF Term', 'Score'))
 
-        top_scores_percent = (top_scores * 100).round(2)
-        top_scores_percent_str = [str(i)+'%' for i in top_scores_percent]
-        top_scores_percent_str.reverse()
-        codes = [df.at[i, 'code'] for i in top_indices]
-        codes.reverse()
-        terms = [df.at[i, 'term'] for i in top_indices]
-        terms.reverse()
-        disp['IMDRF Code'] = codes
-        disp['IMDRF Term'] = terms
-        disp['Score'] = top_scores_percent_str
+        #top_scores_percent = (top_scores * 100).round(2)
+        #top_scores_percent_str = [str(i)+'%' for i in top_scores_percent]
+        #top_scores_percent_str.reverse()
+        #codes = [df.at[i, 'code'] for i in top_indices]
+        #codes.reverse()
+        #terms = [df.at[i, 'term'] for i in top_indices]
+        #terms.reverse()
+        disp['IMDRF Code'] = p_code
+        disp['IMDRF Term'] = p_desc
+        disp['Score'] = p_score
         st.table(disp)
 
 st.write("________________________________________________________________________________")
@@ -100,7 +110,7 @@ button_style = """
         <style>
         .stButton > button {
             color: blue;
-            width: 300px;
+            width: 250px;
             height: 50px;
         }
         </style>
@@ -111,6 +121,15 @@ st.markdown(button_style, unsafe_allow_html=True)
 
 spacerc7, col7, col9, spacerc9= st.columns((3,2.5,2.5,3))
 
+pmas = pd.read_csv('PMA_AE_Manual.csv', encoding='ISO-8859-1')
+
+
+mn = pmas.query("PMA == 'P060040'")
+sp = pd.read_csv('cp.csv', encoding='ISO-8859-1')
+ot = pmas.query("PMA == 'P100047'")
+ot.dropna(inplace=True)
+ot.reset_index(inplace=True, drop=True)
+
 # Clear session state if the dropdown value changes
 if 'selected_value' not in st.session_state or st.session_state.selected_value != selected:
     st.session_state.clear()
@@ -118,10 +137,9 @@ if 'selected_value' not in st.session_state or st.session_state.selected_value !
    
 # Check if choices are already stored in session state
 if 'choices' not in st.session_state:
-    samp = ['Infection', 'Bleeding', 'Hypertension', 'Neurological Dysfunction', 'Respiratory Failure', 
-            'Pericardial Fluid', 'Cardiac Arrhythmia', 'Missed Dose', 'Underdose', 'Sedation']
+    samp = list(mn['AE_Terms'][:10])
     # Generate random choices and store them in session state
-    st.session_state.choices = random.sample(samp, k=5)
+    st.session_state.choices = samp
 
 # Retrieve choices from session state
 choices = st.session_state.choices
@@ -129,7 +147,8 @@ choices = st.session_state.choices
 # Check if percentages are already stored in session state
 if 'percents' not in st.session_state:
     # Generate random percentages and store them in session state
-    st.session_state.percents = sorted([str(random.randint(10, 99)) + '%' for i in range(5)], reverse=True)
+    rt = mn['Affected / at Risk (%)'][:10]
+    st.session_state.percents = rt
 
 # Retrieve percentages from session state
 percents = st.session_state.percents
@@ -137,75 +156,75 @@ percents = st.session_state.percents
 # Check if percentages_sup are already stored in session state
 if 'percents_sup' not in st.session_state:
     # Generate random percentages_sup and store them in session state
-    st.session_state.percents_sup = sorted([str(random.randint(10, 99)) + '%' for i in range(5)], reverse=True)
+    rt_s = sp['Affected / at Risk (%)'][:10]
+    st.session_state.percents_sup = rt_s
 
 # Retrieve percentages_sup from session state
 percents_sup = st.session_state.percents_sup
 
-# Check if percentages_sup are already stored in session state
-if 'percents_sup1' not in st.session_state:
-    # Generate random percentages_sup and store them in session state
-    st.session_state.percents_sup1 = sorted([str(random.randint(10, 99)) + '%' for i in range(5)], reverse=True)
-
-# Retrieve percentages_sup from session state
-percents_sup1 = st.session_state.percents_sup1
-
-# Check if percentages_other are already stored in session state
-if 'percents_other' not in st.session_state:
-    # Generate random percentages_other and store them in session state
-    st.session_state.percents_other = sorted([str(random.randint(10, 99)) + '%' for i in range(5)], reverse=True)
-
-# Retrieve percentages_other from session state
-percents_other = st.session_state.percents_other
-
-# Check if percentages_other are already stored in session state
-if 'percents_other1' not in st.session_state:
-    # Generate random percentages_other and store them in session state
-    st.session_state.percents_other1 = sorted([str(random.randint(10, 99)) + '%' for i in range(5)], reverse=True)
-
-# Retrieve percentages_other from session state
-percents_other1 = st.session_state.percents_other1
 
 st.markdown("</hr>", unsafe_allow_html=True)
 st.markdown("</hr>", unsafe_allow_html=True)
 with col7:
     sel_choices = []
     exp = st.expander("Pre-loaded AE's/IMDRFs")
-    sel0 = exp.checkbox(f'{choices[0]}', value=True)
     
+    sel0 = exp.checkbox(f'{choices[0]}', value=True)
     if sel0:
         selected0 = choices[0]
         sel_choices.append(choices[0])
+
     sel1 = exp.checkbox(f'{choices[1]}', value=True)
-    
     if sel1:
         selected1 = choices[1]
         sel_choices.append(choices[1])
+ 
     sel2 = exp.checkbox(f'{choices[2]}', value=True)
-    
     if sel2:
         selected2 = choices[2]
         sel_choices.append(choices[2])
-    sel3 = exp.checkbox(f'{choices[3]}', value=True)
-    
+ 
+    sel3 = exp.checkbox(f'{choices[3]}', value=True)   
     if sel3:
         selected3 = choices[3]
         sel_choices.append(choices[3])
-    sel4 = exp.checkbox(f'{choices[4]}', value=True)       
-    
+
+    sel4 = exp.checkbox(f'{choices[4]}', value=True)         
     if sel4:
         selected4 = choices[4]
         sel_choices.append(choices[4])
+   
+    sel5 = exp.checkbox(f'{choices[5]}', value=True)
+    if sel5:
+        selected5 = choices[5]
+        sel_choices.append(choices[5])
+
+    sel6 = exp.checkbox(f'{choices[6]}', value=True)
+    if sel6:
+        selected6 = choices[6]
+        sel_choices.append(choices[6])
+ 
+    sel7 = exp.checkbox(f'{choices[7]}', value=True)
+    if sel7:
+        selected7 = choices[7]
+        sel_choices.append(choices[7])
+ 
+    sel8 = exp.checkbox(f'{choices[8]}', value=True)   
+    if sel8:
+        selected8 = choices[8]
+        sel_choices.append(choices[8])
+
+    sel9 = exp.checkbox(f'{choices[9]}', value=True)         
+    if sel9:
+        selected9 = choices[9]
+        sel_choices.append(choices[9])
 
 st.markdown("</hr>", unsafe_allow_html=True)    
 st.markdown("</hr>", unsafe_allow_html=True)
 
 with col9:
 
-    submissions =[['P1254/S012','P1254/S011-Supplement', 'P1254/S010-Supplement', 'P1111-Other', 'P2354-Other'],
-    ['P6489/S010','P6489/S009-Supplement', 'P6489/S008-Supplement', 'P2222-Other', 'P3456-Other'],
-    ['P9876/S008','P9876/S007-Supplement', 'P9876/S006-Supplement', 'P3333-Other', 'P4567-Other'],
-    ['P3574/S006', 'P3574/S005-Supplement', 'P3574/S004-Supplement', 'P4444-Other', 'P5678-Other']]
+    submissions =[['P060040','P060040/SUP-HeartMate', 'P100047-HeartWare']]
 
 
     exp2 = st.expander("Submission Select")
@@ -217,10 +236,6 @@ with col9:
             sbs1_name = i[1]
             sbs2 = exp2.checkbox(f'{i[2]}', value=False)
             sbs2_name = i[2]
-            sbs3 = exp2.checkbox(f'{i[3]}', value=False)
-            sbs3_name = i[3]
-            sbs4 = exp2.checkbox(f'{i[4]}', value=False)
-            sbs4_name = i[4]
 
 spacer0, col10, spacer1, col11, spacer2, col12, spacer3 = st.columns((0.4,4,0.15,4,0.15,4,0.4))
 
@@ -241,55 +256,30 @@ if sbs1:
     with col11:
 
         # Create an empty DataFrame
-        df = pd.DataFrame(columns=(f'{sbs1_name}', 'Subject Submission'))
+        df2 = pd.DataFrame(columns=(f'{sbs1_name}', 'Subject Submission'))
 
         # Populate the DataFrame
-        df.loc[0] = ['Event', 'Rate Indicator']
+        df2.loc[0] = ['Event', 'Rate Indicator']
         #choices = random.sample(samp1, k=4)
-        for i, choice, percent in zip(range(1, len(sel_choices)+1), sel_choices, percents_sup):
-            df.loc[i] = [choice, percent]
+        for i, choice2, percent2 in zip(range(1, len(sel_choices)+1), sel_choices, percents_sup):
+            df2.loc[i] = [choice2, percent2]
         
-        st.table(df)
+        st.table(df2)
+
 if sbs2:
     with col12:
 
         # Create an empty DataFrame
-        df = pd.DataFrame(columns=(f'{sbs2_name}', 'Subject Submission'))
+        df3 = pd.DataFrame(columns=(f'{sbs2_name}', 'Subject Submission'))
 
         # Populate the DataFrame
-        df.loc[0] = ['Event', 'Rate Indicator']
+        df3.loc[0] = ['Event', 'Rate Indicator']
         #choices = random.sample(samp1, k=4)
-        for i, choice, percent in zip(range(1, len(sel_choices)+1), sel_choices, percents_sup1):
-            df.loc[i] = [choice, percent]
+        terms = list(ot['AE_Terms'][:10])
+        ratess = list(ot['Affected / at Risk (%)'][:10])
+        for i, ter, rat in zip(range(1,11), terms, ratess):
+            df3.loc[i] = [ter, rat]
+
+
         
-        st.table(df)
-
-spacer4, col13, spacer5, col14, spacer6, col15, spacer7 = st.columns((0.4,4,0.15,4,0.15,4,0.4))
-
-if sbs3:
-    with col13:
-
-        # Create an empty DataFrame
-        df = pd.DataFrame(columns=(f'{sbs3_name}', 'Subject Submission'))
-
-        # Populate the DataFrame
-        df.loc[0] = ['Event', 'Rate Indicator']
-        #choices = random.sample(samp1, k=4)
-        for i, choice, percent in zip(range(1, len(sel_choices)+1), sel_choices, percents_other):
-            df.loc[i] = [choice, percent]
-        
-        st.table(df)
-
-if sbs4:
-    with col14:
-
-        # Create an empty DataFrame
-        df = pd.DataFrame(columns=(f'{sbs4_name}', 'Subject Submission'))
-
-        # Populate the DataFrame
-        df.loc[0] = ['Event', 'Rate Indicator']
-        #choices = random.sample(samp1, k=4)
-        for i, choice, percent in zip(range(1, len(sel_choices)+1), sel_choices, percents_other1):
-            df.loc[i] = [choice, percent]
-        
-        st.table(df)
+        st.table(df3)

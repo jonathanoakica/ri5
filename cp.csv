@@ -1,0 +1,22 @@
+PMA,Device Name (from CT),AE_Terms,Affected / at Risk (%),# Events,# MDRs
+P060040,HeartMate XVE ,Bleeding (All serious events) ,41/59 (69.49%) ,70,358
+P060040,HeartMate XVE ,Bleeding requiring surgery ,9/59 (15.25%) ,12,177
+P060040,HeartMate XVE ,Cardiac Arrhythmia ,21/59 (35.59%) ,30,342
+P060040,HeartMate XVE ,Confirmed Malfunctions ,12/59 (20.34%) ,14,39
+P060040,HeartMate XVE ,Device Thrombosis ,0/59 (0.00%) ,0,191
+P060040,HeartMate XVE ,Drive Line Infection ,14/59 (23.73%) ,22,1133
+P060040,HeartMate XVE ,Hemolysis ,0/59 (0.00%) ,0,104
+P060040,HeartMate XVE ,Hepatic Dysfunction ,0/59 (0.00%) ,0,32
+P060040,HeartMate XVE ,Local Infection ,19/59 (32.20%) ,30,111
+P060040,HeartMate XVE ,Myocardial Infarction ,1/59 (1.69%) ,1,117
+P060040,HeartMate XVE ,Other neurological ,9/59 (15.25%) ,11,22
+P060040,HeartMate XVE ,Peripheral Thromboembolism ,6/59 (10.17%) ,6,344
+P060040,HeartMate XVE ,Pocket Infection ,8/59 (13.56%) ,10,59
+P060040,HeartMate XVE ,Psychological ,0/59 (0.00%) ,0,4
+P060040,HeartMate XVE ,Pump Housing ,2/59 (3.39%) ,2,
+P060040,HeartMate XVE ,Renal Failure ,14/59 (23.73%) ,14,175
+P060040,HeartMate XVE ,Respiratory Failure ,24/59 (40.68%) ,33,50
+P060040,HeartMate XVE ,Right Heart Failure (Inotropes) ,16/59 (27.12%) ,19,1068
+P060040,HeartMate XVE ,Right Heart Failure (RVAD) ,3/59 (5.08%) ,3,
+P060040,HeartMate XVE ,Sepsis ,26/59 (44.07%) ,45,70
+P060040,HeartMate XVE ,Stroke ,8/59 (13.56%) ,9,160

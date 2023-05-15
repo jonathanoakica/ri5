@@ -15,14 +15,17 @@ rev = ['P060040']
 
 selected = st.sidebar.selectbox('Review Number:', rev)
 
-with st.sidebar.expander("Business Requirements"):
-    st.sidebar.write("RI5 Business Requirements goes here")
-with st.sidebar.expander("User Story 1"):
-    st.sidebar.write("User Story 1 goes here")
-with st.sidebar.expander("User Story 2"):
-    st.sidebar.write("User Story 2 goes here")
-with st.sidebar.expander("User Story 3"):
-    st.sidebar.write("User Story 3 goes here")
+s_exp = st.sidebar.expander("Business Requirements")
+s_exp.write("RI5 Business Requirements goes here")
+
+s_exp2 = st.sidebar.expander("User Story 1")
+s_exp2.write("User Story 1 goes here")
+
+s_exp3 = st.sidebar.expander("User Story 2")
+s_exp3.write("User Story 2 goes here")
+
+s_exp4 = st.sidebar.expander("User Story 3")
+s_exp4.write("User Story 3 goes here")
 
 col1, col2, col3 = st.columns((5,1,5))
 
